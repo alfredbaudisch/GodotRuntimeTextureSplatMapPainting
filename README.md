@@ -17,6 +17,10 @@ Resulted splat map from the video above:
 # Features
 <ul><li>World Vector3 to UV mapping methods</li><li>Any kind of brush</li><li>Multiple brushes</li><li>Multiple splat maps and multiple textures blended</li><li>Mesh can be anywhere in the world and can be rotated</li></ul>
 
+# Alternative Solution
+My other implementation uses Vertex Painting in order to get the alpha value of texture interpolations. It's simpler, but less flexible and can produce rough results:
+- [In-game vertex painting with Godot Engine (Wash Car Effect)](https://github.com/alfredbaudisch/GodotInGameVertexPaintingDirtEffect)
+
 # Tips and Support
 You can support the development of my open-source contributions and this project on [Patreon](https://www.patreon.com/alfredbaudisch), a [PayPal donation](https://www.paypal.com/donate?hosted_button_id=FC5FTRRE3548C) or [buy me a coffee with Ko-fi](https://ko-fi.com/alfredbaudisch). Or of course, [you can get my Godot UI Masterclass Course](https://bit.ly/GodotUI) and learn how to make data-driven and responsive user interfaces with Godot from scratch (the final result is [open-source](https://github.com/alfredbaudisch/GodotDynamicInventorySystem)).
 
