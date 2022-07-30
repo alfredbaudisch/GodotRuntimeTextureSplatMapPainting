@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://player_1st/player1st.gd" type="Script" id=1]
+
+[sub_resource type="CapsuleShape" id=5]
+radius = 0.5
+height = 2.0
+
+[node name="Player1st" type="KinematicBody"]
+collision_layer = 6
+collision_mask = 3
+script = ExtResource( 1 )
+
+[node name="Pivot" type="Position3D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0 )
+shape = SubResource( 5 )
+
+[node name="SpringArm" type="SpringArm" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0 )
+collision_mask = 4
+margin = 0.2
+
+[node name="Camera" type="Camera" parent="SpringArm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.00907 )
+cull_mask = 31775
+far = 200.0

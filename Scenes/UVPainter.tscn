@@ -1,0 +1,115 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Scripts/TexturePainter.gd" type="Script" id=2]
+[ext_resource path="res://world_env.tres" type="Environment" id=3]
+[ext_resource path="res://Assets/Models/SuzanneUV2.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Shaders/VS_BlendDamageMask.tres" type="Shader" id=5]
+[ext_resource path="res://Scripts/VertexPositionMapper.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/DrawViewport.tscn" type="PackedScene" id=8]
+[ext_resource path="res://player_1st/Player1st.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Textures/ground-tex.jpg" type="Texture" id=10]
+[ext_resource path="res://Assets/Textures/grass-tex.jpg" type="Texture" id=11]
+[ext_resource path="res://Assets/Brushes/RoundBrush.png" type="Texture" id=12]
+
+[sub_resource type="ShaderMaterial" id=11]
+resource_local_to_scene = true
+shader = ExtResource( 5 )
+shader_param/DirtColor = ExtResource( 10 )
+shader_param/BaseColor = ExtResource( 11 )
+
+[sub_resource type="PlaneMesh" id=4]
+
+[sub_resource type="ConcavePolygonShape" id=7]
+data = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
+
+[sub_resource type="InputEventMouseButton" id=9]
+button_index = 3
+pressed = true
+
+[sub_resource type="ShortCut" id=10]
+shortcut = SubResource( 9 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="TexturePainter" type="Spatial" parent="."]
+script = ExtResource( 2 )
+
+[node name="UVPosition" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="Actors" type="Spatial" parent="."]
+transform = Transform( 0.677849, -0.701743, -0.219266, 0.667681, 0.71243, -0.215977, 0.307772, 0, 0.95146, -25.2104, 1.52356, -7.55211 )
+
+[node name="Mesh" parent="Actors" instance=ExtResource( 4 )]
+
+[node name="High" parent="Actors/Mesh" index="0"]
+material/0 = SubResource( 11 )
+
+[node name="Player1st" parent="." instance=ExtResource( 9 )]
+transform = Transform( 0.999889, 0.00236448, -0.0146833, 0, 0.987281, 0.158983, 0.0148725, -0.158966, 0.987172, -24.6078, 3.87275, -1.69072 )
+collision_layer = 2
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 13, 0 )
+light_energy = 0.4
+light_cull_mask = 4293950495
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 3 )
+
+[node name="Level" type="Spatial" parent="."]
+
+[node name="Ground" type="MeshInstance" parent="Level"]
+transform = Transform( 2197.93, 0, 0, 0, 102.277, 0, 0, 0, 2159.37, 0, 0, 0 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+
+[node name="GroundStaticBody" type="StaticBody" parent="Level/Ground"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/Ground/GroundStaticBody"]
+shape = SubResource( 7 )
+
+[node name="Ground2" type="MeshInstance" parent="Level"]
+transform = Transform( 2197.93, 0, 0, 0, 47.568, -1911.61, 0, 90.5423, 1004.3, 0, 0, -27.6073 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+
+[node name="GroundStaticBody" type="StaticBody" parent="Level/Ground2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/Ground2/GroundStaticBody"]
+shape = SubResource( 7 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 48.0
+margin_bottom = 25.0
+shortcut = SubResource( 10 )
+text = "SAVE"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -540.0
+margin_right = 960.0
+margin_bottom = 540.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+margin_left = 928.0
+margin_top = 508.0
+margin_right = 992.0
+margin_bottom = 572.0
+mouse_filter = 2
+texture = ExtResource( 12 )
+
+[node name="DrawViewport0" parent="." instance=ExtResource( 8 )]
+
+[connection signal="pressed" from="Button" to="TexturePainter" method="_on_Button_pressed"]
+
+[editable path="Actors/Mesh"]
+[editable path="Player1st"]

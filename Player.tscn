@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends KinematicBody
+
+onready var camera = $Pivot/Camera
+
+var gravity = -9.8
+var max_speed = 8
+var mouse_sensitivity = 0.002  # radians/pixel
+
+var velocity = Vector3()
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func get_input():
+	var input_dir = Vector3()
+	# desired move in camera direction
+	if Input.is_action_pressed(\"move_forward\"):
+		input_dir += -global_transform.basis.z
+	if Input.is_action_pressed(\"move_back\"):
+		input_dir += global_transform.basis.z
+	if Input.is_action_pressed(\"move_left\"):
+		input_dir += -global_transform.basis.x
+	if Input.is_action_pressed(\"move_right\"):
+		input_dir += global_transform.basis.x
+	input_dir = input_dir.normalized()
+	return input_dir
+	
+func _unhandled_input(event):
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		rotate_y(-event.relative.x * mouse_sensitivity)
+		$Pivot.rotate_x(-event.relative.y * mouse_sensitivity)
+		$Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
+		
+func _physics_process(delta):
+	velocity.y += gravity * delta
+	var desired_velocity = get_input() * max_speed
+
+	velocity.x = desired_velocity.x
+	velocity.z = desired_velocity.z
+	velocity = move_and_slide(velocity, Vector3.UP, true)
+"
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.5
+
+[node name="Player" type="KinematicBody"]
+script = SubResource( 3 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="Pivot" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="Pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7523, 0 )
+current = true
