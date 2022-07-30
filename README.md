@@ -2,7 +2,8 @@
 
 Texture and Splat Map painting in-game for Godot Engine (also World Vector3 to UV mapping).
 
-Tutorial and instructions: https://alfredbaudisch.com/blog/gamedev/godot-engine/godot-engine-in-game-splat-map-texture-painting-dirt-removal-effect/
+- Tutorial and details: https://alfredbaudisch.com/blog/gamedev/godot-engine/godot-engine-in-game-splat-map-texture-painting-dirt-removal-effect/
+- Play instructions: you can walk in the world with WASD and to paint click and drag with the left mouse button
 
 https://user-images.githubusercontent.com/248383/181904593-a44b1326-94f2-4937-882b-82cefa869cbf.mp4
 
