@@ -21,6 +21,10 @@ Resulted splat map from the video above:
 My other implementation uses Vertex Painting in order to get the alpha value of texture interpolations. It's simpler, but less flexible and can produce rough results:
 - [In-game vertex painting with Godot Engine (Wash Car Effect)](https://github.com/alfredbaudisch/GodotInGameVertexPaintingDirtEffect)
 
+# Credits
+- The World Vector3 to UV code is heavily adapted from [this Godot 2 repository from 2017](https://github.com/thefryscorer/GodotPaintDemo) by Daniel Byron. I also got the Barycentric calculation function from [Arnklit’s Waterways](https://github.com/Arnklit/WaterwaysDemo) Godot Plugin.
+- Other than that, it's all implemented by me.
+
 # Tips and Support
 You can support the development of my open-source contributions and this project on [Patreon](https://www.patreon.com/alfredbaudisch), a [PayPal donation](https://www.paypal.com/donate?hosted_button_id=FC5FTRRE3548C) or [buy me a coffee with Ko-fi](https://ko-fi.com/alfredbaudisch). Or of course, [you can get my Godot UI Masterclass Course](https://bit.ly/GodotUI) and learn how to make data-driven and responsive user interfaces with Godot from scratch (the final result is [open-source](https://github.com/alfredbaudisch/GodotDynamicInventorySystem)).
 
